@@ -38,9 +38,6 @@ if (isset($_POST['registro'])) {
 }
 ?>
 
-<!-- Resto del código HTML -->
-
-
 <!DOCTYPE html>
 <html>
 <head>
