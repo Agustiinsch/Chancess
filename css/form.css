@@ -1,0 +1,13 @@
+.contenedor1{
+    border:solid 1px black;
+    border-radius: 10px;
+    height: 100%;
+    width: 500px;
+    margin: auto;
+}
+.contenedor2{
+    margin: auto;
+    width: 400px;
+    height: 90%;
+    background-color:aqua;
+}
