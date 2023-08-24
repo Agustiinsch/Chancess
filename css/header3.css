@@ -162,7 +162,6 @@ a:hover {
 
 .dd-button {
   display: inline-block;
-  border: 1px solid gray;
   border-radius: 15px;
   padding: 10px 30px 10px 20px;
   background-color: #ffffff;
@@ -170,7 +169,7 @@ a:hover {
   white-space: nowrap;
   width: 90px;
   color: white;
-  background-color: #3c71b6;
+  background-color: #45a049;
 }
 
 .dd-button:after {
