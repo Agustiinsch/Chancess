@@ -47,6 +47,7 @@ header{
 .navegacion{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 	margin: 0px auto;
   text-decoration: none;
@@ -269,4 +270,13 @@ a:hover {
     justify-content: center;
     justify-content: space-between;
     margin: auto;
+}
+@media(max-width:991px){
+  .navegacion{
+    text-align: center;
+  }
+  .footer-links{
+    width: 100%;
+    margin-bottom: 30px;
+  }
 }
