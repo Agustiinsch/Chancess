@@ -4,7 +4,7 @@ require_once 'config.php';
 
 // Función para establecer la conexión a la base de datos
 function conectar() {
-    $conexion = new mysqli('localhost', 'id21112562_root', 'k|6Q8Tny-5h88PDz', 'id21112562_chances');
+    $conexion = new mysqli('localhost', 'chances', 'chances123', 'chances');
 
     if ($conexion->connect_error) {
         die('Error de conexión: ' . $conexion->connect_error);

@@ -21,7 +21,7 @@
 <body>
 <header>
     <nav class="navegacion">
-        <a href="index.php" class="logo">Chances</a>
+        <a href="panel.php" class="logo">Chances</a>
         <ul class="menu">
           <li><a href="#">¿Porque Chances?</a></li>
           <li><a href="#">Encontrar Trabajo</a></li>
@@ -57,10 +57,6 @@
                 <input type="text" id="titulo" name="titulo" required><br>
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripcion" required></textarea><br>
-                <label for="fechaemision">Fecha Emisión:</label>
-                <input type="date" id="fechaemision" name="fechaemision" required><br>
-                <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" required><br>
                 <input type="submit" value="Publicar Trabajo">
             </form>
         </div>
@@ -83,4 +79,3 @@
 
 </body>
 </html>
-

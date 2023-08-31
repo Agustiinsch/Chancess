@@ -1,12 +1,12 @@
 <?php
 session_start();
-
 // Verifica si el usuario ha iniciado sesión
 if (isset($_SESSION['usuario'])) {
-    // El usuario ha iniciado sesión, redirige a la página principal
-    header('Location: principal.php');
-    exit();
+  // El usuario no ha iniciado sesión, redirige a la página de inicio
+  header('Location: panel.php');
+  exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,15 +34,6 @@ if (isset($_SESSION['usuario'])) {
         <ul class="menu">
           <li><a href="#">¿Porque Chances?</a></li>
           <li><a href="#">Encontrar Trabajo</a></li>
-          <li><a href="#">Rubros</a>
-            <ul class="subrubro">
-              <li><a href="#">Plomeria</a></li>
-              <li><a href="#">Electricista</a></li>
-              <li><a href="#">Mamposteria</a></li>
-              <li><a href="#">Paisajismo</a></li>
-              <li><a href="#">Niñera/o</a></li>
-            </ul>
-          </li>
           <li><a href="#">Contacto</a></li>
         </ul>
         
@@ -124,10 +115,3 @@ if (isset($_SESSION['usuario'])) {
    </main> 
 </body>
 </html>
-<?php
-session_start();
-if (!isset($_SESSION['email'])) {
-    header('Location: login.php');
-    exit();
-}
-?> 

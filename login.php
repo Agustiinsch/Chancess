@@ -1,8 +1,16 @@
 <?php
-require_once 'conexion.php';
+session_start();
+// Verifica si el usuario ha iniciado sesión
+if (isset($_SESSION['usuario'])) {
+    // El usuario no ha iniciado sesión, redirige a la página de inicio
+    header('Location: panel.php');
+    exit();
+  }
 
 // Verifica si se envió el formulario de inicio de sesión
+
 if (isset($_POST['login'])) {
+    require_once 'conexion.php';
     // Obtén los datos del formulario
     $email = $_POST['username'];
     $contrasena = $_POST['contrasena'];
@@ -19,8 +27,9 @@ if (isset($_POST['login'])) {
 
         if ($result && $result->num_rows > 0) {
             // Inicio de sesión exitoso
-            session_start();
-            $_SESSION['email'] = $email;
+            $usuario = $result->fetch_assoc();
+            var_dump($usuario);
+            $_SESSION['usuario'] = $usuario['usuario_id'];
             header('Location: panel.php');
             exit();
         } else {
@@ -46,7 +55,7 @@ if (isset($_POST['login'])) {
         <form action="login.php" method="POST">
             <div class="form-group">
                 <label for="username">Gmail:</label>
-                <input type="text" id="username" name="username" placeholder="Ingresa tu Gmail" value="<?php echo $email; ?>">
+                <input type="text" id="username" name="username" placeholder="Ingresa tu Gmail">
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>

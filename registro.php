@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+// Verifica si el usuario ha iniciado sesión
+if (isset($_SESSION['usuario'])) {
+    // El usuario no ha iniciado sesión, redirige a la página de inicio
+    header('Location: panel.php');
+    exit();
+}
+
 require_once 'conexion.php';
 
 $nombre = $apellido = $email = $contrasena = '';
@@ -13,9 +22,7 @@ if (isset($_POST['registro'])) {
 
     if (empty($nombre) || empty($apellido) || empty($email) || empty($contrasena)) {
         $error = "Por favor, completa todos los campos.";
-    } elseif ($politicas_aceptadas) {
-        var_dump($nombre,$apellido,$email,$contrasena);
-        var_dump($politicas_aceptadas);
+    } elseif (!$politicas_aceptadas) {
         $error = "Debes aceptar las políticas de privacidad para registrarte.";
     } else {
         $query = "SELECT * FROM usuarios WHERE email = '$email'";
@@ -78,23 +85,24 @@ if (isset($_POST['registro'])) {
             
             <label for="contrasena">Contraseña:</label>
             <input type="password" id="password" name="contrasena" value="<?php echo $contrasena; ?>">
-            <input type="submit" name="registro" value="Registrarse">
-            <!--<button type="submit"><a href="index.php">Registrarse</a></button>-->
+      
             
             <div class="contenedorterminos">
                 <div class="ubiterminos">
                     Si estoy enterado de <a>Términos de servicio de Chances</a> incluido el <a>Acuerdo de Usuario</a>
                     y la <a>Política de privacidad </a>
                 </div>
-        </div>
+            </div>
     
             <label class="checkbox-container">
-                <input type="checkbox">
-                <span class="checkmark"></span>
+            <input type="checkbox" name="politicas" required>
+            <span class="checkmark"></span>
             </label>
+
+        <input type="submit" name="registro" value="Registrarse">
         </form>
         <button id="open">
-            Hacer Click
+            Ver terminos y servicios
           </button>
           
           <div id="modal_container" class="modal-container">
@@ -204,11 +212,9 @@ if (isset($_POST['registro'])) {
             </div>
           </div>
     </div> 
-  </section>
+</section>
 
-  <script src="js/terminos.js"></script>
+<script src="js/terminos.js"></script>
 
 </body>
 </html>
-
-

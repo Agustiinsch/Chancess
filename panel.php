@@ -1,4 +1,13 @@
+<?php
+session_start();
+// Verifica si el usuario ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+  // El usuario no ha iniciado sesión, redirige a la página de inicio
+  header('Location: index.php');
+  exit();
+}
 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +18,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/form.css">
-    <link rel="stylesheet" href="/css/footer.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Playfair:ital,wght@1,300&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
@@ -20,7 +28,7 @@
 <body>
     <header>
     <nav class="navegacion">
-        <a href="index.php" class="logo">Chances</a>
+        <a href="panel.php" class="logo">Chances</a>
         <ul class="menu">
           <li><a href="#">¿Porque Chances?</a></li>
           <li><a href="#">Encontrar Trabajo</a></li>
@@ -64,37 +72,5 @@
         <a href="#" class="card-link">Ver publicacion</a>
       </div>
     </div>
-    <footer class="footer"> 
-      <div class="contenedorfo">
-        <div class="footer-row">
-          <div class="footer-links">
-            <h3>Contacto</h3>
-            <ul>
-              <li><a href="#">nosotros</a></li>
-              <li><a href="#">nosotros</a></li>
-              <li><a href="#">nosotros</a></li>
-              <li><a href="#">nosotros</a></li>
-
-            </ul>
-          </div>
-
-          <div class="footer-links">
-            <h3>Chances</h3>
-            <ul>
-              <li><a href="nosotros"></a>nashe</li>
-            </ul>
-          </div>
-
-          <div class="footer-links">
-            <h3>redes</h3>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
 </body>
 </html>
