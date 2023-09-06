@@ -1,12 +1,12 @@
 <?php
 session_start();
+
 // Verifica si el usuario ha iniciado sesión
 if (isset($_SESSION['usuario'])) {
-  // El usuario no ha iniciado sesión, redirige a la página de inicio
-  header('Location: panel.php');
-  exit();
+    // El usuario ha iniciado sesión, redirige a la página principal
+    header('Location: panel.php');
+    exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,13 +15,17 @@ if (isset($_SESSION['usuario'])) {
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-  <link rel="shortcut icon" href="img/perfil.jpg"> 
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+   <link rel="shortcut icon" href="img/perfil.jpg"> 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair:ital,wght@1,300&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Dosis&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+     .portada{
+  background-color: #dfdfdf;
+}
   </style>
   <title>Chances</title>
 </head>
@@ -30,6 +34,7 @@ if (isset($_SESSION['usuario'])) {
   <header>
     <div class="portada">
       <nav class="navegacion">
+
         <a href="index.php" class="logo">Chances</a>
         <ul class="menu">
           <li><a href="#">¿Porque Chances?</a></li>
@@ -54,6 +59,7 @@ if (isset($_SESSION['usuario'])) {
       <div class="linea"></div>
     </div>
   </header>
+
   <div class="gif">
     <img src="img/1.gif" alt="">
   </div>

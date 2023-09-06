@@ -1,11 +1,8 @@
 <?php
-session_start();
-// Verifica si el usuario ha iniciado sesión
-if (!isset($_SESSION['usuario'])) {
-  // El usuario no ha iniciado sesión, redirige a la página de inicio
-  header('Location: index.php');
-  exit();
-}
+require 'conexion.php'; // Asegúrate de tener tu archivo de conexión
+
+$query = "SELECT `trabajos-usuarios`.`id_trabajos`, `trabajos-usuarios`.`usuario_id`, `trabajos-usuarios`.`titulo`, `trabajos-usuarios`.`descripcion`, `usuarios`.`nombre` AS `nombre_usuario` FROM `trabajos-usuarios` INNER JOIN `usuarios` ON `trabajos-usuarios`.`usuario_id` = `usuarios`.`usuario_id`";
+$result = mysqli_query($conexion, $query);
 
 ?>
 <!DOCTYPE html>
@@ -23,6 +20,9 @@ if (!isset($_SESSION['usuario'])) {
       @import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Dosis&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+      .navegacion{
+  background-color: #dfdfdf;
+}
     </style>
   </head>
 <body>
@@ -63,14 +63,48 @@ if (!isset($_SESSION['usuario'])) {
       </article>
       <article class="trabajos"></article>
     </div> -->
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Solicito plomero para arreglar cañeria</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">Agustin</h6>
-        <p class="card-text">El problema se encuentra en el baño, hay que romper la pared para resolverlo. Ademas quiero instalar un termotanque en el lavadero.  </p>
-        <p class="fech-public text-body-secondary">3 dias</p>
-        <a href="#" class="card-link">Ver publicacion</a>
-      </div>
-    </div>
+    <!--<div class="card">-->
+    <!--  <div class="card-body">-->
+    <!--    <h5 class="card-title">Solicito plomero para arreglar cañeria</h5>-->
+    <!--    <h6 class="card-subtitle mb-2 text-body-secondary">Agustin</h6>-->
+    <!--    <p class="card-text">El problema se encuentra en el baño, hay que romper la pared para resolverlo. Ademas quiero instalar un termotanque en el lavadero.  </p>-->
+    <!--    <p class="fech-public text-body-secondary">3 dias</p>-->
+    <!--    <a href="#" class="card-link">Ver publicacion</a>-->
+    <!--  </div>-->
+    <!--</div>-->
+    
+<div class="contenido">
+<?php
+if (!$result) {
+    echo "Error en la consulta: " . mysqli_error($conexion);
+} else {
+ 
+    // Mostrar las publicaciones en tarjetas
+    while ($row = mysqli_fetch_assoc($result)) {
+    echo '<div class="publicar">';
+
+      echo '<div class="card">';
+        echo '<div class="card-body">';
+
+          
+          echo '<h5 class="card-title">' . $row['titulo'] . '</h5>';
+          echo '<h6 class="card-subtitle mb-2 text-body-secondary">' . $row['nombre_usuario'] . ' solicita</h6>';
+          echo '<p class="card-text">' . $row['descripcion'] . '</p>';
+          echo'<div class="enlaces">';
+            echo '<a href="detalles_usuario.php?usuario_id=' . $row['usuario_id'] . '" class="card-link">Ver publicación</a>';
+            echo '<a href="https://wa.me/541122429667/" class="card-link">Contactar</a>';
+          echo'</div>';
+        
+          echo '</div>';
+      echo '</div>';
+
+    echo '</div>';
+}
+
+}
+?>
+</div>
+
+   
 </body>
 </html>

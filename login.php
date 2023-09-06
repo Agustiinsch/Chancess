@@ -1,16 +1,9 @@
 <?php
-session_start();
-// Verifica si el usuario ha iniciado sesión
-if (isset($_SESSION['usuario'])) {
-    // El usuario no ha iniciado sesión, redirige a la página de inicio
-    header('Location: panel.php');
-    exit();
-  }
+require_once 'conexion.php';
 
 // Verifica si se envió el formulario de inicio de sesión
 
 if (isset($_POST['login'])) {
-    require_once 'conexion.php';
     // Obtén los datos del formulario
     $email = $_POST['username'];
     $contrasena = $_POST['contrasena'];
@@ -28,8 +21,8 @@ if (isset($_POST['login'])) {
         if ($result && $result->num_rows > 0) {
             // Inicio de sesión exitoso
             $usuario = $result->fetch_assoc();
-            var_dump($usuario);
-            $_SESSION['usuario'] = $usuario['usuario_id'];
+            session_start();
+            $_SESSION['usuario_id'] = $usuario['usuario_id'];
             header('Location: panel.php');
             exit();
         } else {

@@ -95,14 +95,17 @@ input[type=text] {
 }
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: green;
   color: white;
   border: none;
-  border-radius: 30px;
+  border-radius: 7px;
   cursor: pointer;
+  font-size: 20px;
 }
 button:hover {
-  background-color: #45a049;
+  transition: 0.5s;
+  font-weight: bold;
+  background-color: rgb(2, 167, 2);
 }
 
 .inisesion a{

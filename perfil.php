@@ -1,5 +1,26 @@
+<?php
+session_start(); // Iniciar sesión si no lo has hecho
+
+require 'conexion.php'; // Asegúrate de tener tu archivo de conexión
+
+$usuario_id = $_SESSION['usuario_id']; // Obtener el ID del usuario actual desde la sesión
+
+if(isset($_POST['btn_imagen'])){
+  var_dump($_FILES);
+}
+
+$query = "SELECT `id_trabajos`, `titulo`, `descripcion` FROM `trabajos-usuarios` WHERE `usuario_id` = '$usuario_id'";
+$result = mysqli_query($conexion, $query);
+// Verificar si el usuario ha iniciado sesión
+            if (!isset($_SESSION['usuario_id'])) {
+                echo "No has iniciado sesión.";
+                exit; // Puedes redirigir a la página de inicio de sesión si lo prefieres
+            }
+
+  
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +28,7 @@
     <title>Página principal</title>
     <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="css/header3.css">
+    <link rel="stylesheet" href="css/form.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
@@ -16,6 +38,9 @@
       @import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Dosis&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+      .navegacion{
+  background-color: #dfdfdf;
+}
     </style>
 </head>
 <body>
@@ -48,34 +73,55 @@
       </nav>
       <div class="linea"></div>
 </header>
-
 <div class="container">
-        <div class="publicar">
-            <h2>Publicar Trabajo</h2>
-            <form action="alta.php" method="post">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required><br>
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" required></textarea><br>
-                <input type="submit" value="Publicar Trabajo">
-            </form>
-        </div>
+    <form action="" method="post" enctype="multipart/form-data" >
+      <input type="file" name="imagen_perfil" id="">
+      <input type="submit" name="btn_imagen" value="Cargar">
+    </form>
 
-        <div class="trabajos">
-            <h2>Mis Trabajos</h2>
-            <ul>
-                <?php
-                // Aquí obtendrías los trabajos del usuario y los listarías
-                // Puedes utilizar un bucle para mostrar cada trabajo con opciones de editar y eliminar
-                ?>
-                <li>
-                    Título del Trabajo
-                    <a href="editar.php?id=ID_DEL_TRABAJO">Editar</a>
-                    <a href="eliminar.php?id=ID_DEL_TRABAJO">Eliminar</a>
-                </li>
-            </ul>
-        </div>
+    <div class=formu>
+        <?php     
+            // Formulario para publicar trabajo
+            echo '<div class="form-box">';
+            echo '<form action="procesar_publicacion.php" method="post" >';
+            echo '<div class="form-group">';
+            echo '<label for="titulo">Título:</label>';
+            echo '<input type="text" id="titulo" name="titulo" class="form-control" placeholder="Título" required>';
+            echo '</div>';
+            echo '<div class="form-group">';
+            echo '<label for="descripcion">Descripción:</label>';
+            echo '<textarea id="descripcion" name="descripcion" class="form-control" placeholder="Descripción"required></textarea>';
+            echo '</div>';
+            echo '<button type="submit" class="btn btn-primary">Publicar</button>';
+            echo '</form>';
+            echo '</div>';
+        ?>
     </div>
+        
+        <div class="publicaciones">
+            <br><br>
+        <h1>Mis Publicaciones:</h1>
+  
+        <?php
+        // Mostrar las publicaciones del usuario actual
+        while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+          <div class="publicar">
+          <div class="card">
+          <div class="card-body">
+          <h5 class="card-title"><?=$row['titulo']?></h5>
+          <p class="card-text"><?=$row['descripcion']?></p>
+          <a href='editar_publicacion.php?id=<?=$row['id_trabajos']?>' class='editar'>Editar</a>
+          <a href='eliminar_publicacion.php?id=<?=$row['id_trabajos']?>' class='eliminar'>Eliminar</a><br>
+          </div>
+          </div>
+          </div>
+        <?php
+        }
+        ?>
+    </div>
+    </div>
+        
 
 </body>
 </html>
